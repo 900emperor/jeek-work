@@ -1,19 +1,32 @@
 package com.mu.week01;
 
+import java.io.*;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URL;
 
-public class CustomeClassLoader extends ClassLoader {
+public class CustomeClassLoader extends ClassLoader implements Serializable {
 
     public static void main(String[] args) throws Exception {
-        String path = "file:///src/main/resources/Hello.xlass";
-        new CustomeClassLoader().loadClass("Hello", path).newInstance();
+        String path = "/Users/***/IdeaProjects/jeek-work/01jvm/src/main/resources/Hello.xlass";
+        Class targetClass = new CustomeClassLoader().loadClass("Hello", path).newInstance().getClass();
+        Method method = targetClass.getMethod("hello", new Class[]{});
+        method.invoke(new CustomeClassLoader(), null);
     }
 
     protected Class<?> loadClass(String showName, String path) throws ClassNotFoundException {
         try {
-            URL url = new URL(path);
-            byte[] bytes = url.getFile().getBytes();
+//            URL url = new URL(path);
+            File file = new File(path);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            ByteArrayOutputStream bufferedOutputStream = new ByteArrayOutputStream((int)file.length());
+            int buff_size = 4096;
+            byte[] temp = new byte[buff_size];
+            int len = 0;
+            while (-1 != (len = bufferedInputStream.read(temp, 0, buff_size)) ) {
+                bufferedOutputStream.write(temp, 0, len);
+            }
+            byte[] bytes = bufferedOutputStream.toByteArray();
             byte[] data = new byte[bytes.length];
             for(int i=0; i<data.length; i++) {
                 data[i] = handler(bytes[i]);
@@ -22,7 +35,12 @@ public class CustomeClassLoader extends ClassLoader {
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**
