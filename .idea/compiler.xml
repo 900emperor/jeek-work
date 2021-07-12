@@ -7,12 +7,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="01jvm" />
+        <module name="03concurrency" />
         <module name="02nio" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="01jvm" target="1.5" />
       <module name="02nio" target="1.5" />
+      <module name="03concurrency" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="03concurrency" options="-parameters" />
+    </option>
   </component>
 </project>

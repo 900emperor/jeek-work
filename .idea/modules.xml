@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/01jvm/01jvm.iml" filepath="$PROJECT_DIR$/01jvm/01jvm.iml" />
       <module fileurl="file://$PROJECT_DIR$/02nio/02nio.iml" filepath="$PROJECT_DIR$/02nio/02nio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03concurrency/03concurrency.iml" filepath="$PROJECT_DIR$/03concurrency/03concurrency.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/jeek-work.iml" filepath="$PROJECT_DIR$/.idea/jeek-work.iml" />
     </modules>
   </component>
